@@ -1,0 +1,65 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, violet, orangered);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    padding: 30px;
+    background: rgba(255, 182, 193, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+.bold{
+    padding: 30 px 30 px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.checkbox-group {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.checkbox-group label {
+    display: block;
+    margin: 10px 0;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.submit-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

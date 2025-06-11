@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <meta name="theme-color" content="#000000">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/static/service-worker.js')
+        .then(() => console.log('Service Worker Registered'));
+    }
+  </script>
+</head>
+
+<head>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Declaration</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Declaration</h1>
+        <form action="{{ url_for('declare') }}" method="post">
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="option1" value="Option 1" required>
+                    I hereby declare that I consent to being monitored by this software at all times. I have no objections to the observation of my activities by this software. 
+                </label>
+
+                <div class="bold">
+                    <b>If any doubts regarding the system exist, please read the terms and conditions before proceeding.</b>
+                    </div>
+
+                <a href="{{ url_for('terms') }}" target="_blank" >Terms & Conditions</a>
+            </div>
+            <div class="button-container">
+                <button type="submit" class="submit-button"> Submit  </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='report.css') }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Health Report</title>
+</head>
+<body>
+    <div class="head"> 
+        <h1>Health Report</h1>
+    </div>
+
+    <div class="container">
+  
+        <h2>Overview</h2>
+        <p>This report provides a detailed analysis of your health metrics based on the latest data.</p>
+
+       
+        <h2>Health Metrics</h2>
+        <p>Here are some of your key health metrics:</p>
+        <ul>
+            <li>Blink Rate: <span id="blinkRate">{{ blink_rate }}</span> blinks/min</li>
+        </ul>
+
+
+        <h2>Health Problems</h2>
+        <p>Here are the health problems you've reported:</p>
+        <ul id="healthProblems">
+            {% if user.health_problems %}
+                {% for problem in user.health_problems.split(',') %}
+                    <li>{{ problem.strip() }}</li>
+                {% endfor %}
+            {% else %}
+                <li>No health problems reported.</li>
+            {% endif %}
+        </ul>
+
+      
+        <h2>Recommendations</h2>
+        <p>Based on your blink rate and health problems, here are some personalized recommendations:</p>
+        <div id="recommendations">
+     
+        </div>
+    </div>
+
+  
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const blinkRate = {{ blink_rate | safe }};  // Pass blink rate as a JS-safe variable
+            const healthProblems = [
+                {% if user.health_problems %}
+                    {% for problem in user.health_problems.split(',') %}
+                        "{{ problem.strip() }}",
+                    {% endfor %}
+                {% endif %}
+            ];
+
+            let recommendations = '';
+
+            if (blinkRate < 10) {
+                recommendations += `
+                    <p><strong>Low Blink Rate (Below 10 blinks per minute):</strong></p>
+                    <ul>
+                        <li>Take regular breaks from screens every 20 minutes to rest your eyes.</li>
+                        <li>Increase blinking consciously while working on screens.</li>
+                        <li>Your body was detected on bad posture several times. Keep your body straight!</li>
+                    </ul>
+                `;
+            } else if (blinkRate <= 20) {
+                recommendations += `
+                    <p><strong>Normal Blink Rate (10-20 blinks per minute):</strong></p>
+                    <ul>
+                        <li>Continue maintaining good eye health habits.</li>
+                        <li>Follow the 20-20-20 rule: Look 20 feet away for 20 seconds every 20 minutes.</li>
+                    <li>Your body was detected on bad posture several times. Keep your body straight!</li>
+                    </ul>
+                `;
+            } else if (blinkRate <= 30) {
+                recommendations += `
+                    <p><strong>Moderate High Blink Rate (21-30 blinks per minute):</strong></p>
+                    <ul>
+                        <li>Practice relaxation techniques such as deep breathing or meditation to reduce stress.</li>
+                    <li>Your body was detected on bad posture several times. Keep your body straight!</li>
+                    </ul>
+                `;
+            } else if (blinkRate <= 40) {
+                recommendations += `
+                    <p><strong>High Blink Rate (31-40 blinks per minute):</strong></p>
+                    <ul>
+                        <li>Reduce screen brightness and practice relaxation exercises.</li>
+                        <li>Your body was detected on bad posture several times. Keep your body straight!</li>
+                    </ul>
+                `;
+            } else {
+                recommendations += `
+                    <p><strong>Very High Blink Rate (Above 40 blinks per minute):</strong></p>
+                    <ul>
+                        <li>Seek medical attention to rule out any serious conditions.</li>
+                    <li>Your body was detected on bad posture several times. Keep your body straight!</li>
+                    </ul>
+                `;
+            }
+
+          
+            if (healthProblems.length > 0) {
+                recommendations += `<p><strong>Additional Recommendations:</strong></p><ul>`;
+                if (healthProblems.includes("Eye strain")) {
+                    recommendations += `<li>Use lubricating eye drops to prevent dryness.</li>`;
+                }
+                if (healthProblems.includes("Posture issues")) {
+                    recommendations += `<li>Set up an ergonomic workstation to support better posture.</li>`;
+                }
+                if (healthProblems.includes("Screen fatigue")) {
+                    recommendations += `<li>Limit screen time and use blue light-blocking glasses.</li>`;
+                }
+                if (healthProblems.includes("Neck pain")) {
+                    recommendations += `<li>Perform neck stretches every 30 minutes.</li>`;
+                }
+                recommendations += `</ul>`;
+            }
+
+            
+            document.getElementById('recommendations').innerHTML = recommendations;
+        });
+    </script>
+</body>
+</html>

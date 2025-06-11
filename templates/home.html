@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styleh.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>SMDDUH Homepage</title>
+</head>
+<body>
+    <header>
+        <div class="logo-title">
+            <h1 style="color: black;">SMDDUH [SYSTEM FOR MAINTAINING DIGITAL DEVICE USERS' HEALTH]</h1>
+        </div>
+        <div class="search-container">
+            <input type="text" placeholder="Search..." class="search-bar">
+        </div>
+        <div class="theme-toggle">
+            <button onclick="toggleTheme()">Toggle Theme</button>
+        </div>
+    </header>
+
+    <div class="side-panel" id="sidePanel">
+        <div class="close-btn" onclick="closeSidePanel()">&#10006;</div>
+        <nav class="side-nav">
+            <ul>
+                <li class="home"><a href="home">Home</a></li>
+                <li class="home"><a href="profile">Profile</a></li>
+                <li class="home"><a href="report">Health Reports</a></li>
+                <li class="home"><a href="index">Reminder</a></li>
+                <li class="home"><a href="login">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+    <span class="side-trigger" onclick="toggleSidePanel()">&#9776;</span>
+
+    <div class="main-content">
+        <p>Welcome to SMDDUH! Stay proactive about your health while engaging with digital devices.</p>
+        <div id="analytics">
+            <h2>Health Analytics</h2>
+            <ul>
+                <li>Average Blink Rate: <span id="blinkRate">15 blinks/min</span></li>
+                <li>Posture Score: <span id="postureScore">Good</span></li>
+                <li>Break Adherence: <span id="breakAdherence">80%</span></li>
+            </ul>
+        </div>
+        <div id="recommendations">
+            <h2>Recommendations</h2>
+            <p>Tips to improve your posture and eye health:</p>
+            <ul>
+                <li>Adjust your monitor height for eye-level viewing.</li>
+                <li>Follow the 20-20-20 rule to reduce eye strain.</li>
+                <li>Take regular 5-minute breaks and stretch your shoulders.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidePanel() {
+            const sidePanel = document.getElementById('sidePanel');
+            if (sidePanel.style.width === '0px' || sidePanel.style.width === '') {
+                sidePanel.style.width = '250px';
+            } else {
+                sidePanel.style.width = '0px';
+            }
+        }
+
+        function closeSidePanel() {
+            const sidePanel = document.getElementById('sidePanel');
+            sidePanel.style.width = '0px';
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-theme');
+        }
+    </script>
+</body>
+</html>

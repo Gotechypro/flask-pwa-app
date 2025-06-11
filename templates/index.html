@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylei.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Reminder</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Reminder</h1>
+        <a>This reminder is activated when you press start reminder. This starts monitoring your eyes.
+        The blink rate is recorded in the database. Also keep good posture while using this system. This system also recognize body posture also. <a>
+        <div id="status">Status: Inactive</div>
+        <div class="button-container">
+            <button id="startReminder" class="submit-button">Start Reminder</button>
+            <button id="stopReminder" class="submit-button">Stop Reminder</button>
+        </div>
+        <img src="{{ url_for('static', filename='posture.jpg') }}" alt="Posture Reminder" width="300px" height="150px">
+        <a style="color: darkred;">This is the correct body posture. Keep your body like this...</a>
+   </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</body>
+</html>

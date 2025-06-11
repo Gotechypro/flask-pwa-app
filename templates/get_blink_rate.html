@@ -1,0 +1,10 @@
+<script>
+    setInterval(() => {
+        fetch('/get_blink_rate')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('blink-rate').innerText = `${data.blink_rate} blinks/min`;
+            });
+    }, 5000);  // Refresh every 5 seconds
+</script>
+<p>Blink Rate: <span id="blink-rate">N/A</span></p>

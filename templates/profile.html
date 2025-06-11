@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylei.css') }}">
+    <title>Profile</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, <a style="color: red;">{{ user.username }}!</a></h1>
+       
+        <p>You will get E-mails on {{ user.email }}.</p>
+
+        <p>Also, we can call or message on this phone number: {{ user.mobile }}.</p>
+
+        <p>You are identified as a {{ user.gender }}.</p>
+
+        <p>You are {{ user.age }} years old.</p>
+
+        <p>You are having these health problems: {{ user.health_problems }}</p>
+
+        <p>Your Blink rate is  <span id="blink-rate">N/A</span> .</p>
+        <div id=blinkrate>
+            <button id="update-blink-rate" onclick="fetchBlinkRate()">Update Blink Rate</button>
+            <br><br>
+            <a href="{{ url_for('edit_profile') }}">Edit Profile</a>
+        </div>
+
+        <a href="{{ url_for('report') }}">Know more about your health</a>
+        <br><br>
+         <a href="{{url_for('home') }}">Go to Home</a>
+         <br><br>
+        <br><br>
+        <a href="{{ url_for('logout') }}">Logout</a>
+        <br><br>
+        <a href="{{ url_for('index') }}">Check my eyes</a>
+        <br><br>
+        <a href="{{ url_for('home') }}" class="btn">Go to Home</a>
+
+        
+
+    </div>
+
+    
+    <script>
+        function fetchBlinkRate() {
+    console.log("Fetching blink rate..."); 
+    fetch('/get_blink_rate')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Fetched data:", data); 
+            document.getElementById('blink-rate').innerText = data.blink_rate + ' blinks/min';
+        })
+        .catch(error => {
+            console.error('Error fetching blink rate:', error);
+            alert('Failed to fetch the blink rate.');
+        });
+}
+
+    </script>
+</body>
+</html>
