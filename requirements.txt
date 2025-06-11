@@ -54,7 +54,6 @@ pyinstaller-hooks-contrib==2025.5
 pyparsing==3.2.3
 pypiwin32==223
 python-dateutil==2.9.0.post0
-python-magic-bin==0.4.14
 python-multipart==0.0.20
 pywin32==310
 pywin32-ctypes==0.2.3
